@@ -3,10 +3,13 @@
     <div class="gap mr-auto">
       <a class="navbar-brand" href="#">Carousel</a>
     </div>
-    <a class="navbar-brand" *ngIf="loggedIn" style="color: greenyellow"
+    <a
+      class="navbar-brand"
+      *ngIf="_auth.currentUser$ | async"
+      style="color: greenyellow"
       >Logged In</a
     >
-    <div class="dropdown" *ngIf="loggedIn" dropdown>
+    <div class="dropdown" *ngIf="_auth.currentUser$ | async" dropdown>
       <a class="dropdown-toggle text-light" dropdownToggle>Welcome User</a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item" (click)="logout()">Logout</a>
@@ -14,7 +17,7 @@
     </div>
 
     <form
-      *ngIf="!loggedIn"
+      *ngIf="!(_auth.currentUser$ | async)"
       #loginForm="ngForm"
       (ngSubmit)="login()"
       autocomplete="off"

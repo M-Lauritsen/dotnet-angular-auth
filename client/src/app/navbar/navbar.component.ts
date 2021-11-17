@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from '../_models/user';
 import { AuthService } from '../_services/auth.service';
 
 @Component({
@@ -8,9 +10,8 @@ import { AuthService } from '../_services/auth.service';
 })
 export class NavbarComponent implements OnInit {
   model: any = {};
-  loggedIn: boolean = false;
 
-  constructor(private _auth: AuthService) {}
+  constructor(public _auth: AuthService) {}
 
   ngOnInit(): void {}
 
@@ -18,7 +19,6 @@ export class NavbarComponent implements OnInit {
     this._auth.login(this.model).subscribe(
       (response) => {
         console.log(response);
-        this.loggedIn = true;
       },
       (error) => {
         console.log(error);
@@ -27,6 +27,6 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.loggedIn = false;
+    this._auth.logout();
   }
 }
