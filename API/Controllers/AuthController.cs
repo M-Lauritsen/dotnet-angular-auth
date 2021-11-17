@@ -57,7 +57,7 @@ namespace API.Controllers
 
             if(user == null)
             {
-                return Unauthorized();
+                return Unauthorized("Invalid username");
             }
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
@@ -67,7 +67,7 @@ namespace API.Controllers
             {
                 if(computedHash[i] != user.PasswordHash[i])
                 {
-                    return Unauthorized();
+                    return Unauthorized("Invalid password");
                 }
             }
 
