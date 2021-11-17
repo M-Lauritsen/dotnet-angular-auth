@@ -16,13 +16,17 @@ export class NavbarComponent implements OnInit {
 
   login() {
     this._auth.login(this.model).subscribe(
-      (next) => {
-        console.log('Logged in successfully');
+      (response) => {
+        console.log(response);
         this.loggedIn = true;
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  logout() {
+    this.loggedIn = false;
   }
 }

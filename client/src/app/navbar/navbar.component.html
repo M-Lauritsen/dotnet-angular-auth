@@ -1,8 +1,20 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">Carousel</a>
-    <div class="divider mr-auto"></div>
+    <div class="gap mr-auto">
+      <a class="navbar-brand" href="#">Carousel</a>
+    </div>
+    <a class="navbar-brand" *ngIf="loggedIn" style="color: greenyellow"
+      >Logged In</a
+    >
+    <div class="dropdown" *ngIf="loggedIn" dropdown>
+      <a class="dropdown-toggle text-light" dropdownToggle>Welcome User</a>
+      <div class="dropdown-menu mt-3" *dropdownMenu>
+        <a class="dropdown-item" (click)="logout()">Logout</a>
+      </div>
+    </div>
+
     <form
+      *ngIf="!loggedIn"
       #loginForm="ngForm"
       (ngSubmit)="login()"
       autocomplete="off"
